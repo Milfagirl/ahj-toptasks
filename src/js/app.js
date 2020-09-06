@@ -16,9 +16,10 @@ elementInput.addEventListener('keydown', (event) => {
 };
 });
 
-// Добавляем элементы в PinnedList
+
 document.addEventListener('click', (event) => {
-  if ((event.target.id === 'inputList') && (event.target.closest('[class = alltasks]'))) {
+// Добавляем элементы в PinnedList
+  if ((event.target.id === 'inputAllTasks') && (event.target.closest('[class = alltasks]'))) {
     if (event.target.checked) {
       elementPinned = document.querySelector('.pinned');
       console.log(elementPinned.innerText);
@@ -26,9 +27,16 @@ document.addEventListener('click', (event) => {
         elementPinned.innerText = '';
       };
       const dataid = (event.target.closest('.liInTask').dataset.id);
-      const li = document.querySelector(`li[data-id = '${dataid}']`);
+      console.log(dataid);
+      const div = document.querySelector('.alltasks');
+      const li = div.querySelector(`li[data-id = '${dataid}']`);
+      console.log(li);
       const value = li.querySelector('p').innerText;
+      console.log(value);
       elementPinned.insertAdjacentHTML('beforeEnd', addPinnedList(value));
+      li.closest('ul').remove();
     };
-  };   
+  };  
+// Убираем pinned tasks из alltasks
+
 });
