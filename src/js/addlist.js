@@ -1,4 +1,4 @@
-{/* <ul'>
+/* <ul'>
        <li>
         <label for="inputList">
            <div>
@@ -7,22 +7,12 @@
            </div>
         </label>
         </li>
-    </ul> */}
+    </ul> */
 
-export default function addList(name) {
-  const div = document.querySelector('.alltasks');
-  const node = div.querySelectorAll('.liInTask');
-  console.log(node);
-  const count = node.length;
-  console.log('count', count);
-  return `<ul><li class = 'liInTask' data-id = ${count}><label for="inputAllTasks"><div><p>${name}</p><input type="checkbox" id="inputAllTasks" name="pin"></div></label></li></ul>`;
+export default function addList(task) {
+  return `<ul><li class = 'liInTask' data-id = ${task.id}><label for="inputAllTasks"><div><p>${task.value}</p><input type="checkbox" id="inputAllTasks" name="pin" required="required"></div></label></li></ul>`;
 }
 
-export function addPinnedList(name) {
-  const div = document.querySelector('.pinned');
-  const node = div.querySelectorAll('.liInPinned');
-  console.log(node);
-  const count = node.length;
-  console.log('count', count);
-  return `<ul><li class = 'liInPinned' data-id = ${count}><label for="inputPinned"><div><p>${name}</p><input type="checkbox" id="inputPinned" name="pin" checked></div></label></li></ul>`;
+export function addPinnedList(task) {
+  return `<ul><li class = 'liInPinned' data-id = ${task.id}><label for="inputPinned"><div><p>${task.value}</p><input type="checkbox" id="inputPinned" name="pin" checked></div></label></li></ul>`;
 }
