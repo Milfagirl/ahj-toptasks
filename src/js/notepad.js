@@ -50,6 +50,19 @@ export class Notepad {
     }
     this.pinnedArrayList = array;
   }
+
+  // filter(el) {
+  //   const array = this.allArrayList;
+  //   const newarray = [];
+  //   console.log(array);
+  //   for (let i = 0; i < array.length; i++) {
+  //     if (array[i].value.includes(el)) {
+  //       newarray.push(array[i]);
+  //     }
+  //   }
+  //   console.log(newarray);
+  //   return newarray;
+  //   }
 }
 
 const notepad = new Notepad();

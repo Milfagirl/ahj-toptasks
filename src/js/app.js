@@ -1,29 +1,38 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
+/* eslint-disable import/no-cycle */
 /* eslint-disable prefer-destructuring */
 import Task from './task.js';
 import notepad from './notepad.js';
-import addList, { addPinnedList } from './addlist.js';
+import addList, { addPinnedList, redraw } from './addlist.js';
 
 const elementInput = document.querySelector('#inputform');
 let elementPinned = document.querySelector('.pinned');
-const elementAllTasks = document.querySelector('.alltasks');
+export const elementAllTasks = document.querySelector('.alltasks');
 
 // Добавляем элементы в tasklist
 elementInput.addEventListener('keydown', (event) => {
-  if (event.keyCode === 13) {
+  if (event.key === 'Enter' && elementInput.value.length > 0) {
     event.preventDefault();
     const task = new Task(elementInput.value);
     task.getId = notepad.getAllArrayList.length;
-
     notepad.getAllArrayList = task;
-    console.log(notepad.getAllArrayList);
-
-    elementAllTasks.insertAdjacentHTML('beforeEnd', addList(task));
+    redraw();
     elementInput.value = '';
+  } else if (event.key === 'Backspace' && elementInput.value.length <= 1) {
+    console.log(notepad.getAllArrayList);
+    redraw();
   }
 });
 
 document.addEventListener('click', (event) => {
-// Добавляем элементы в PinnedList
+  event.preventDefault();
+  if (event.target.id === 'inputform') {
+    elementAllTasks.innerHTML = '';
+    redraw();
+  }
+
+  // Добавляем элементы в PinnedList
   if ((event.target.id === 'inputAllTasks') && (event.target.closest('[class = alltasks]'))) {
     if (event.target.checked) {
       elementPinned = document.querySelector('.pinned');
@@ -40,24 +49,15 @@ document.addEventListener('click', (event) => {
       notepad.getPinnedArrayList = task;
       elementPinned.insertAdjacentHTML('beforeEnd', addPinnedList(task));
       notepad.deleteAllArrayList(task);
-      console.log('all', notepad.getAllArrayList, 'pinned', notepad.getPinnedArrayList);
       // перерисовываем alltasks после pinned задания
       elementAllTasks.innerHTML = '';
-      notepad.getAllArrayList.forEach((element) => {
-        if (element) {
-          elementAllTasks.insertAdjacentHTML('beforeEnd', addList(element));
-        }
-      });
+      redraw();
     }
   }
 
   // Удаляем элементы из pinnedlist
   if ((event.target.id === 'inputPinned') && (event.target.closest('[class = pinned]'))) {
     if (!event.target.checked) {
-    // elementPinned = document.querySelector('.pinned');
-    // if (elementPinned.innerText === 'No pinned tasks') {
-    //   elementPinned.innerText = '';
-    // };
       const dataid = (event.target.closest('.liInPinned').dataset.id);
       let task = {};
       notepad.getPinnedArrayList.forEach((element) => {
@@ -67,10 +67,7 @@ document.addEventListener('click', (event) => {
       });
       notepad.getAllArrayList = task;
       elementAllTasks.insertAdjacentHTML('beforeEnd', addList(task));
-      // elementPinned.insertAdjacentHTML('beforeEnd', addPinnedList(task));
       notepad.deletePinnedArrayList(task);
-      console.log('all', notepad.getAllArrayList, 'pinned', notepad.getPinnedArrayList);
-
       elementPinned.innerHTML = '';
       if (notepad.getPinnedArrayList.length === 0) {
         elementPinned.innerText = 'No pinned tasks';
@@ -82,4 +79,19 @@ document.addEventListener('click', (event) => {
       });
     }
   }
+});
+
+elementInput.addEventListener('input', () => {
+  if (elementInput.value.length > 0) {
+    elementAllTasks.innerHTML = '';
+    const array = notepad.getAllArrayList;
+    const newarray = array.filter((element) => {
+      if (element.value.includes(elementInput.value)) {
+        return element.value;
+      }
+    });
+    newarray.forEach((element) => {
+      elementAllTasks.insertAdjacentHTML('beforeEnd', addList(element));
+    });
+  } else redraw();
 });
