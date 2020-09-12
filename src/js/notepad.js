@@ -26,7 +26,6 @@ export class Notepad {
 
   deleteAllArrayList(el) {
     const array = this.allArrayList;
-    console.log(array);
     for (let i = 0; i < array.length; i++) {
       if (array[i]) {
         if (array[i].id === el.id) {

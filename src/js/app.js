@@ -26,11 +26,11 @@ elementInput.addEventListener('keydown', (event) => {
   //   redraw();
   // }
 // });
+});
 
 document.addEventListener('click', (event) => {
   // event.preventDefault();
-  console.log(event.target);
-  if (event.target === 'inputform') {
+  if (event.target.id === 'inputform') {
     elementInput.value = '';
     elementAllTasks.innerHTML = '';
     redraw();
