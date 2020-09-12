@@ -28,7 +28,7 @@ elementInput.addEventListener('keydown', (event) => {
 // });
 
 document.addEventListener('click', (event) => {
-  event.preventDefault();
+  // event.preventDefault();
   console.log(event.target);
   if (event.target === 'inputform') {
     elementInput.value = '';
