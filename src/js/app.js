@@ -19,8 +19,9 @@ elementInput.addEventListener('keydown', (event) => {
     notepad.getAllArrayList = task;
     redraw();
     elementInput.value = '';
-  } else if (event.key === 'Backspace' && elementInput.value.length <= 1) {
-    console.log(notepad.getAllArrayList);
+  }
+  if (event.key === 'Backspace' && elementInput.value.length === 0) {
+    // console.log(notepad.getAllArrayList);
     redraw();
   }
 });
