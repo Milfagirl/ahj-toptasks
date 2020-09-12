@@ -29,7 +29,8 @@ elementInput.addEventListener('keydown', (event) => {
 
 document.addEventListener('click', (event) => {
   event.preventDefault();
-  if (event.target.id === 'inputform') {
+  console.log(event.target);
+  if (event.target === 'inputform') {
     elementInput.value = '';
     elementAllTasks.innerHTML = '';
     redraw();
