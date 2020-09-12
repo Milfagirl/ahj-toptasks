@@ -20,11 +20,11 @@ elementInput.addEventListener('keydown', (event) => {
     redraw();
     elementInput.value = '';
   }
-  if (event.key === 'Backspace' && elementInput.value.length === 0) {
-    // console.log(notepad.getAllArrayList);
-    elementAllTasks.innerHTML = '';
-    redraw();
-  }
+  // if (event.key === 'Backspace' && elementInput.value.length === 0) {
+  //   // console.log(notepad.getAllArrayList);
+  //   elementAllTasks.innerHTML = '';
+  //   redraw();
+  // }
 });
 
 // document.addEventListener('click', (event) => {
@@ -51,6 +51,7 @@ elementInput.addEventListener('keydown', (event) => {
       notepad.getPinnedArrayList = task;
       elementPinned.insertAdjacentHTML('beforeEnd', addPinnedList(task));
       notepad.deleteAllArrayList(task);
+      elementInput.value = '';
       // перерисовываем alltasks после pinned задания
       elementAllTasks.innerHTML = '';
       redraw();
