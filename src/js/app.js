@@ -27,12 +27,12 @@ elementInput.addEventListener('keydown', (event) => {
   }
 });
 
-document.addEventListener('click', (event) => {
-  event.preventDefault();
-  if (event.target.id === 'inputform') {
-    elementAllTasks.innerHTML = '';
-    redraw();
-  }
+// document.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   if (event.target.id === 'inputform') {
+//     elementAllTasks.innerHTML = '';
+//     redraw();
+//   }
 
   // Добавляем элементы в PinnedList
   if ((event.target.id === 'inputAllTasks') && (event.target.closest('[class = alltasks]'))) {
