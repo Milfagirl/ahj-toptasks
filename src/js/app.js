@@ -55,6 +55,8 @@ elementInput.addEventListener('keydown', (event) => {
       // перерисовываем alltasks после pinned задания
       elementAllTasks.innerHTML = '';
       redraw();
+      elementInput.value = '';
+      elementInput.innerText = '';
     }
   }
 
