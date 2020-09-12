@@ -51,7 +51,7 @@ elementInput.addEventListener('keydown', (event) => {
       notepad.getPinnedArrayList = task;
       elementPinned.insertAdjacentHTML('beforeEnd', addPinnedList(task));
       notepad.deleteAllArrayList(task);
-      elementInput.value = '';
+      elementInput.innerText= '';
       // перерисовываем alltasks после pinned задания
       elementAllTasks.innerHTML = '';
       redraw();
