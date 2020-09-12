@@ -25,7 +25,7 @@ elementInput.addEventListener('keydown', (event) => {
   //   elementAllTasks.innerHTML = '';
   //   redraw();
   // }
-});
+// });
 
 // document.addEventListener('click', (event) => {
 //   event.preventDefault();
@@ -51,7 +51,7 @@ elementInput.addEventListener('keydown', (event) => {
       notepad.getPinnedArrayList = task;
       elementPinned.insertAdjacentHTML('beforeEnd', addPinnedList(task));
       notepad.deleteAllArrayList(task);
-      elementInput.innerText= '';
+      elementInput.value = '';
       // перерисовываем alltasks после pinned задания
       elementAllTasks.innerHTML = '';
       redraw();
